@@ -917,7 +917,7 @@ class ExportMenu extends GridView
             'exportType' => $this->_exportType,
             'columnSelectorEnabled' => $this->_columnSelectorEnabled,
             'exportRequestParam' => $this->exportRequestParam,
-            'exportMode'=>$this->disablePaging ? 'full' : 'paging',
+            'exportMode' => $this->disablePaging ? 'full' : 'paging',
             'exportTypeParam' => self::PARAM_EXPORT_TYPE,
             'exportColsParam' => self::PARAM_EXPORT_COLS,
             'colselFlagParam' => self::PARAM_COLSEL_FLAG,

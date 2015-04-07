@@ -253,9 +253,17 @@ class ExportMenu extends GridView
     /**
      * @var string the request parameter ($_GET or $_POST) that
      * will be submitted during export
+     * 
+     * exportMode = full | paging 
      */
-    public $exportRequestParam = 'exportFull';
-
+    public $exportRequestParam = 'exportMode';
+    
+    /**
+     * @var boolean $disablePaging whether to disable the pagination , this can be controlled by request params:
+     *      $_GET['exportMode'] = 'paging' or  $_POST['exportMode'] = 'paging';
+     */
+    protected $disablePaging = true ;
+    
     /**
      * @var array the output style configuration options. It must be the style
      * configuration array as required by PHPExcel.
@@ -518,6 +526,10 @@ class ExportMenu extends GridView
             !empty($_POST[$this->exportRequestParam]) &&
             $_POST[$this->exportRequestParam];
         if ($this->_triggerDownload) {
+            
+            $exportMode =  $_POST[$this->exportRequestParam] ;
+            $this->disablePaing = empty($exportMode) || $exportMode == 'full' ;
+            
             Yii::$app->controller->layout = false;
             $this->_exportType = $_POST[self::PARAM_EXPORT_TYPE];
             $this->_columnSelectorEnabled = $_POST[self::PARAM_COLSEL_FLAG];
@@ -703,7 +715,10 @@ class ExportMenu extends GridView
     public function initExport()
     {
         $this->_provider = clone($this->dataProvider);
-        $this->_provider->pagination = false;
+        
+        if($this->disablePaging){
+            $this->_provider->pagination = false;
+        }
         if ($this->initProvider) {
             $this->_provider->prepare(true);
         }

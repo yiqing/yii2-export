@@ -264,6 +264,11 @@ class ExportMenu extends GridView
      */
     protected $disablePaging = true ;
     
+    public function setDisablePaging($val=false)
+    {
+        $this->disablePaging = ($val == true);
+    }
+    
     /**
      * @var array the output style configuration options. It must be the style
      * configuration array as required by PHPExcel.
@@ -912,6 +917,7 @@ class ExportMenu extends GridView
             'exportType' => $this->_exportType,
             'columnSelectorEnabled' => $this->_columnSelectorEnabled,
             'exportRequestParam' => $this->exportRequestParam,
+            'exportMode'=>$this->disablePaging ? 'full' : 'paging',
             'exportTypeParam' => self::PARAM_EXPORT_TYPE,
             'exportColsParam' => self::PARAM_EXPORT_COLS,
             'colselFlagParam' => self::PARAM_COLSEL_FLAG,

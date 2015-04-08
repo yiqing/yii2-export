@@ -533,7 +533,7 @@ class ExportMenu extends GridView
         if ($this->_triggerDownload) {
             
             $exportMode =  $_POST[$this->exportRequestParam] ;
-            $this->disablePaing = empty($exportMode) || $exportMode == 'full' ;
+            $this->disablePaging = empty($exportMode) || $exportMode == 'full' ;
             
             Yii::$app->controller->layout = false;
             $this->_exportType = $_POST[self::PARAM_EXPORT_TYPE];
